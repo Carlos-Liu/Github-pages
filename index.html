@@ -1,88 +1,130 @@
-<!DOCTYPE html>
-<html lang="en-us">
+<!doctype html>
+<html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>How to replace ActionLink with image using Razor in ASP.NET MVC by Carlos-Liu</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
   <body>
-    <section class="page-header">
-      <h1 class="project-name">How to replace ActionLink with image using Razor in ASP.NET MVC</h1>
-      <h2 class="project-tagline">ASP.NET MVC</h2>
-    </section>
 
-    <section class="main-content">
-      <p>Sometimes you will use ActionLink in the page, but the problem is that the view may look a littlt bit poor when the link's text is long, so at the moment it is better to replace the text by using an image. Below is the steps on how to achieve this</p>
+      <header>
+        <h1>How to replace ActionLink with image using Razor in ASP.NET MVC</h1>
+        <p>ASP.NET MVC</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/Carlos-Liu" class="button fork"><strong>View On GitHub</strong></a>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <p>Sometimes you will use ActionLink in the page, but the problem is that the view may look a littlt bit poor when the link's text is long, so at the moment it is better to replace the text by using an image. Below is the steps on how to achieve this</p>
 
 <p>[Image]</p>
 
-<h2>
-<a id="create-an-extension-method" class="anchor" href="#create-an-extension-method" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create an extension method</h2>
+<h3>
+<a id="create-an-extension-method" class="anchor" href="#create-an-extension-method" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create an extension method</h3>
 
-<p><code>namespace Test.Extensions</code>
-<code>{</code>
-  <code>/// &lt;summary&gt;</code>
-  <code>/// Extensions for HtmlHelper class</code>
-  <code>/// &lt;/summary&gt;</code>
-  <code>public static class HtmlHelperExtensions</code>
-  <code>{</code>
-    <code>/// &lt;summary&gt;</code>
-    <code>/// Replace the action link with image using Razor</code>
-    <code>/// &lt;/summary&gt;</code>
-    <code>/// &lt;param name="html"&gt;&lt;/param&gt;</code>
-    <code>/// &lt;param name="action"&gt;The name of the corresponding action.&lt;/param&gt;</code>
-    <code>/// &lt;param name="routeValues"&gt;An object that contains the parameters for a route&lt;/param&gt;</code>
-    <code>/// &lt;param name="imagePath"&gt;The path of the image file&lt;/param&gt;</code>
-    <code>/// &lt;param name="alt"&gt;The alt attribute specifies an alternate text for an image, if the image cannot be displayed&lt;/param&gt;</code>
-    <code>/// &lt;param name="tooltip"&gt;Tooltip of the image&lt;/param&gt;</code>
-    <code>/// &lt;returns&gt;An anchor element (a element) with 'img' tag embedded.&lt;/returns&gt;</code>
-    <code>public static MvcHtmlString ActionImage(this HtmlHelper html, string action, object routeValues, string imagePath, string alt, string tooltip = "")</code>
-    <code>{</code>
-      <code>// refer to http://stackoverflow.com/questions/4896439/action-image-mvc3-razor</code>
-      <code>var url = new UrlHelper(html.ViewContext.RequestContext);</code></p>
+<pre><code>namespace BCI.Nlcc.Extensions
+{
+  /// &lt;summary&gt;
+  /// Extensions for HtmlHelper class
+  /// &lt;/summary&gt;
+  public static class HtmlHelperExtensions
+  {
+    /// &lt;summary&gt;
+    /// Replace the action link with image using Razor
+    /// &lt;/summary&gt;
+    /// &lt;param name="html"&gt;&lt;/param&gt;
+    /// &lt;param name="action"&gt;The name of the corresponding action.&lt;/param&gt;
+    /// &lt;param name="routeValues"&gt;An object that contains the parameters for a route&lt;/param&gt;
+    /// &lt;param name="imagePath"&gt;The path of the image file&lt;/param&gt;
+    /// &lt;param name="alt"&gt;The alt attribute specifies an alternate text for an image, if the image cannot be displayed&lt;/param&gt;
+    /// &lt;param name="tooltip"&gt;Tooltip of the image&lt;/param&gt;
+    /// &lt;returns&gt;An anchor element (a element) with 'img' tag embedded.&lt;/returns&gt;
+    public static MvcHtmlString ActionImage(this HtmlHelper html, string action, object routeValues, string imagePath, string alt, string tooltip = "")
+    {
+      // refer to http://stackoverflow.com/questions/4896439/action-image-mvc3-razor
+      var url = new UrlHelper(html.ViewContext.RequestContext);
 
-<pre><code>  `// build the &lt;img&gt; tag`
-  `var imgBuilder = new TagBuilder("img");`
-  `imgBuilder.MergeAttribute("src", url.Content(imagePath));`
-  `imgBuilder.MergeAttribute("alt", alt);`
-  `imgBuilder.MergeAttribute("title", tooltip);`
-  `string imgHtml = imgBuilder.ToString(TagRenderMode.SelfClosing);`
+      // build the &lt;img&gt; tag
+      var imgBuilder = new TagBuilder("img");
+      imgBuilder.MergeAttribute("src", url.Content(imagePath));
+      imgBuilder.MergeAttribute("alt", alt);
+      imgBuilder.MergeAttribute("title", tooltip);
+      string imgHtml = imgBuilder.ToString(TagRenderMode.SelfClosing);
 
-  `// build the &lt;a&gt; tag`
-  `var anchorBuilder = new TagBuilder("a");`
-  `anchorBuilder.MergeAttribute("href", url.Action(action, routeValues));`
-  `anchorBuilder.InnerHtml = imgHtml; // include the &lt;img&gt; tag inside`
-  `string anchorHtml = anchorBuilder.ToString(TagRenderMode.Normal);`
+      // build the &lt;a&gt; tag
+      var anchorBuilder = new TagBuilder("a");
+      anchorBuilder.MergeAttribute("href", url.Action(action, routeValues));
+      anchorBuilder.InnerHtml = imgHtml; // include the &lt;img&gt; tag inside
+      string anchorHtml = anchorBuilder.ToString(TagRenderMode.Normal);
 
-  `return MvcHtmlString.Create(anchorHtml);`
-`}`
+      return MvcHtmlString.Create(anchorHtml);
+    }
+  }
+}
 </code></pre>
 
-<p><code>}</code>
-<code>}</code></p>
+<h3>
+<a id="update-the-webconfig" class="anchor" href="#update-the-webconfig" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Update the web.config</h3>
 
-<p>Then in the view
-<code>@Html.ActionImage("EditAccount", new { userId = user.Id }, "~/Content/Images/editAccount.png", "Edit", "Edit the account)</code></p>
+<p>If you intent to use the above method in multiple views, then do as below
+In the "web.config" file in <strong>Views</strong> directory of your project (notice it is not the main web.config in project's root), find this section:
+            
+              
+                
+                  
+                  
+                  .
+                  .
+                  &lt;!-- etc --&gt;
+                
+              
+            </p>
+
+<p>you can add your custom namespace like this:
+     
+that will add the namespace to all of .cshtml (and/or .vbhtml) files.</p>
+
+<p>If you just want to use above method in a single page, you could simplely using the namespace at the top of your view</p>
+
+<pre><code> @using Test. Extensions
+</code></pre>
 
 <h3>
-<a id="references" class="anchor" href="#references" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>References</h3>
+<a id="view" class="anchor" href="#view" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>View</h3>
+
+<p><code>@Html.ActionImage("EditAccount", new { userId = user.Id }, "~/Content/Images/editAccount.png", "Edit", "Edit the account)</code></p>
+
+<h2>
+<a id="references" class="anchor" href="#references" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>References</h2>
 
 <blockquote>
 <p><a href="http://stackoverflow.com/questions/4896439/action-image-mvc3-razor">http://stackoverflow.com/questions/4896439/action-image-mvc3-razor</a>
-<a href="http://stackoverflow.com/questions/11716916/tooltip-on-image">http://stackoverflow.com/questions/11716916/tooltip-on-image</a></p>
+<a href="http://stackoverflow.com/questions/11716916/tooltip-on-image">http://stackoverflow.com/questions/11716916/tooltip-on-image</a>
+<a href="http://stackoverflow.com/questions/3239006/how-do-i-import-a-namespace-in-razor-view-page/6723046#6723046">http://stackoverflow.com/questions/3239006/how-do-i-import-a-namespace-in-razor-view-page/6723046#6723046</a></p>
 </blockquote>
-
-      <footer class="site-footer">
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </section>
+      <footer>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
       </footer>
-
-    </section>
-
-  
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
   </body>
 </html>
