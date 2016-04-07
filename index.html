@@ -25,7 +25,7 @@
         </ul>
       </header>
       <section>
-        <p>Sometimes you will use *<em>ActionLink *</em>in the page, but the problem is that the view may look a little bit poor when the link's text is long, so at the moment it is better to replace the text by using an image. Below is the steps on how to achieve this</p>
+        <p>Sometimes you will use <strong>ActionLink</strong> in the page, but the problem is that the view may look a little bit poor when the link's text is long, so at the moment it is better to replace the text by using an image. Below is the steps on how to achieve this</p>
 
 <p>[Image]</p>
 
@@ -77,30 +77,37 @@
 <a id="update-the-webconfig" class="anchor" href="#update-the-webconfig" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Update the web.config</h3>
 
 <p>If you intent to use the above method in multiple views, then do as below
-In the "web.config" file in <strong>Views</strong> directory of your project (notice it is not the main web.config in project's root), find this section:
-    
-      
-        
-          
-          
-          .
-        
-      
-        </p>
+In the "web.config" file in <strong>Views</strong> directory of your project (notice it is not the main web.config in project's root), find this section:</p>
 
-<p>you can add your custom namespace like this:
-     
-that will add the namespace to all of .cshtml (and/or .vbhtml) files.</p>
+<pre><code>&lt;system.web.webPages.razor&gt;
+  &lt;pages pageBaseType="System.Web.Mvc.WebViewPage"&gt;
+    &lt;namespaces&gt;
+      &lt;add namespace="System.Web.Mvc" /&gt;
+      &lt;add namespace="System.Web.Mvc.Ajax" /&gt;
+      .
+      .
+      &lt;!-- etc --&gt;
+    &lt;/namespaces&gt;
+  &lt;/pages&gt;
+&lt;/system.web.webPages.razor&gt;
+</code></pre>
+
+<p>you can add your custom namespace like this:</p>
+
+<pre><code>    &lt;add namespace="Test.Extensions" /&gt;
+</code></pre>
+
+<p>that will add the namespace to all of .cshtml (and/or .vbhtml) files.</p>
 
 <p>If you just want to use above method in a single page, you could simplely using the namespace at the top of your view</p>
 
-<pre><code> @using Test. Extensions
+<pre><code>  @using Test. Extensions
 </code></pre>
 
 <h3>
 <a id="view" class="anchor" href="#view" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>View</h3>
 
-<pre><code>@Html.ActionImage("EditAccount", new { userId = user.Id }, "~/Content/Images/editAccount.png", "Edit", "Edit the account)
+<pre><code> @Html.ActionImage("EditAccount", new { userId = user.Id }, "~/Content/Images/editAccount.png", "Edit", "Edit the account)
 </code></pre>
 
 <h2>
