@@ -1,30 +1,31 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
     <title>How to replace ActionLink with image using Razor in ASP.NET MVC by Carlos-Liu</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-dark.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
+
+    <header>
+      <div class="container">
         <h1>How to replace ActionLink with image using Razor in ASP.NET MVC</h1>
-        <p>ASP.NET MVC</p>
-        <p class="view"><a href="https://github.com/Carlos-Liu">View the Project on GitHub <small>Carlos-Liu</small></a></p>
-        <ul>
-          <li class="single"><a href="https://github.com/Carlos-Liu/carlos-liu.github.io">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
+        <h2>ASP.NET MVC</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/Carlos-Liu" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
         <p>Sometimes you will use <strong>ActionLink</strong> in the page, but the problem is that the view may look a little bit poor when the link's text is long, so at the moment it is better to replace the text by using an image. Below is the steps on how to achieve this</p>
 
 <p>[Image]</p>
@@ -32,7 +33,8 @@
 <h3>
 <a id="create-an-extension-method" class="anchor" href="#create-an-extension-method" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create an extension method</h3>
 
-<pre><code>namespace BCI.Nlcc.Extensions
+<pre><code>    ```csharp
+namespace BCI.Nlcc.Extensions
 {
   /// &lt;summary&gt;
   /// Extensions for HtmlHelper class
@@ -71,6 +73,7 @@
     }
   }
 }
+    ```
 </code></pre>
 
 <h3>
@@ -120,10 +123,7 @@ In the "web.config" file in <strong>Views</strong> directory of your project (no
 </blockquote>
       </section>
     </div>
-    <footer>
-      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
-    </footer>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
     
   </body>
 </html>
