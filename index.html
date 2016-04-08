@@ -108,10 +108,18 @@ In the "web.config" file in <strong>Views</strong> directory of your project (no
 </code></pre>
 
 <h3>
-<a id="view" class="anchor" href="#view" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>View</h3>
+<a id="apply-in-the-view" class="anchor" href="#apply-in-the-view" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Apply in the View</h3>
 
 <pre><code> @Html.ActionImage("EditAccount", new { userId = user.Id }, "~/Content/Images/editAccount.png", "Edit", "Edit the account)
 </code></pre>
+
+<h3>
+<a id="other-tips" class="anchor" href="#other-tips" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Other Tips</h3>
+
+<ul>
+<li>It's better to use PNG or JPG image instead of BMP file</li>
+<li>Try to use application relative paths (<code>~/Content</code>). The  path <code>../../Content</code> might not be valid from different routes (e.g. <code>/</code>, <code>/Home</code>, <code>/Home/Index</code>)</li>
+</ul>
 
 <h2>
 <a id="references" class="anchor" href="#references" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>References</h2>
@@ -119,7 +127,8 @@ In the "web.config" file in <strong>Views</strong> directory of your project (no
 <blockquote>
 <p><a href="http://stackoverflow.com/questions/4896439/action-image-mvc3-razor">http://stackoverflow.com/questions/4896439/action-image-mvc3-razor</a>
 <a href="http://stackoverflow.com/questions/11716916/tooltip-on-image">http://stackoverflow.com/questions/11716916/tooltip-on-image</a>
-<a href="http://stackoverflow.com/questions/3239006/how-do-i-import-a-namespace-in-razor-view-page/6723046#6723046">http://stackoverflow.com/questions/3239006/how-do-i-import-a-namespace-in-razor-view-page/6723046#6723046</a></p>
+<a href="http://stackoverflow.com/questions/3239006/how-do-i-import-a-namespace-in-razor-view-page/6723046#6723046">http://stackoverflow.com/questions/3239006/how-do-i-import-a-namespace-in-razor-view-page/6723046#6723046</a>
+<a href="http://www.w3schools.com/tags/att_img_alt.asp">http://www.w3schools.com/tags/att_img_alt.asp</a></p>
 </blockquote>
       </section>
     </div>
