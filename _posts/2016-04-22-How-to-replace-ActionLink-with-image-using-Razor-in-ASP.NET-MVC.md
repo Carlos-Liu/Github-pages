@@ -11,7 +11,7 @@ Sometimes you will use **ActionLink** in the page, but the problem is that the v
 
 ### Create an Extension Method
 
-``` csharp
+{% highlight csharp %}
 namespace Test.Extensions
 {
   /// <summary>
@@ -58,14 +58,15 @@ namespace Test.Extensions
 	}
   }
 }
-```
+
+{% endhighlight %}
 
 ### Update The Web.config File
 If you intent to use the above method in multiple views, then do as below
 
 In the "web.config" file in **Views** directory of your project (notice it is not the main web.config in project's root), find this section:
 
-``` xml
+{% highlight xml %}
 <system.web.webPages.razor>
   <pages pageBaseType="System.Web.Mvc.WebViewPage">
 	<namespaces>
@@ -77,13 +78,13 @@ In the "web.config" file in **Views** directory of your project (notice it is no
 	</namespaces>
   </pages>
 </system.web.webPages.razor>
-```
+{% endhighlight %}
 
 you can add your custom namespace like this:
 
-``` csharp
+{% highlight csharp %}
 <add namespace="Test.Extensions" />
-```
+{% endhighlight %}
 
 that will add the namespace to all of .cshtml (and/or .vbhtml) files.
 
@@ -95,9 +96,9 @@ If you just want to use above method in a single page, you could simplely using 
 
 ### Apply in The View
 
-``` csharp
-@Html.ActionImage("EditAccount", new { userId = user.Id }, "~/Content/Images/editAccount.png", "Edit", "Edit the account)
-```
+{% highlight csharp %}
+@Html.ActionImage("EditAccount", new { userId = user.Id }, "~/Content/Images/editAccount.png", "Edit", "Edit the account")
+{% endhighlight %}
 
 ### Other Tips
 
