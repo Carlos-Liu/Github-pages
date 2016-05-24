@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Assembly Version Number"
-date:   2016-05-24 11:48:04
+title:  Assembly Version Number
+date:   2016-05-24 13:48:04
 author: Carlos Liu
-categories: Programming
+categories: 
 ---
 
 Each assembly has a version number as part of its identity. As such, two assemblies that differ by version number are considered by the runtime to be completely different assemblies. This version number is physically represented as a four-part string with the following format:
